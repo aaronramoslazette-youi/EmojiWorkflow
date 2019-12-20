@@ -22,7 +22,7 @@ export default class Canvas extends Component {
     // objects we'll be drawing.
     this.buffers = renderer.initBuffers(gl);
 
-    this.bgTexture = renderer.loadTexture(gl, this.props.backgroundImage)
+    this.bgTexture = renderer.loadTexture(gl, this.props.backgroundImage, gl.LINEAR)
 
     gl.enable(gl.BLEND);
     gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
@@ -51,7 +51,7 @@ export default class Canvas extends Component {
     const canvas = document.querySelector('#glcanvas');
     const gl = canvas.getContext('webgl');
 
-    this.bgTexture = renderer.loadTexture(gl, this.props.backgroundImage)
+    this.bgTexture = renderer.loadTexture(gl, this.props.backgroundImage, gl.LINEAR)
   }
 
   updateSrcTextures(images) {
@@ -59,7 +59,7 @@ export default class Canvas extends Component {
       const canvas = document.querySelector('#glcanvas');
       const gl = canvas.getContext('webgl');
 
-      return { texture: renderer.loadTexture(gl, image.src, gl.LINEAR), aspectRatio: image.aspectRatio };
+      return { texture: renderer.loadTexture(gl, image.src, gl.ONE_MINUS_SRC_ALPHA), aspectRatio: image.aspectRatio };
     });
   }
 
